@@ -4,6 +4,27 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim_runtime/sources_non_forked/Vundle.vim
+call vundle#begin('~/.vim_runtime/sources_non_forked')
+
+" Plugin manager, keep all things in one place 
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-rails'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'chriskempson/base16-vim'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 """"""""""""""""""""""""""""""
 " => Load pathogen paths
@@ -146,5 +167,11 @@ nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => fugitive (Git commands)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"https://github.com/tpope/vim-fugitive
