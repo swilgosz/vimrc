@@ -41,13 +41,6 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
-" vim-rspec commands
-let g:rspec_command = "!spring rspec --drb --color {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
 " colorscheme
 let base16colorspace=256  " Access colors present in 256 colorspace
 if has("gui_running")

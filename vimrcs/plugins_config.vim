@@ -176,3 +176,14 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 " => fugitive (Git commands)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "https://github.com/tpope/vim-fugitive
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-rspec commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rspec_runner = "os_x_iterm2"
+let g:rspec_command = "!spring rspec --color {spec}"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
