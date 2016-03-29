@@ -18,6 +18,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'chriskempson/base16-vim'
 Plugin 'danro/rename.vim'
+Plugin 'heartsentwined/vim-emblem'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
