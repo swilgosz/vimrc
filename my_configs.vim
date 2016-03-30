@@ -76,3 +76,16 @@ let g:gitgutter_highlight_lines = 0
 "autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 let g:gitgutter_sign_column_always = 1
 
+function s:MkNonExDir(file, buf)
+	if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+		let dir=fnamemodify(a:file, ':h')
+		if !isdirectory(dir)
+			call mkdir(dir, 'p')
+		endif
+	endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
