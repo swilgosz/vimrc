@@ -40,7 +40,6 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-
 " colorscheme
 let base16colorspace=256  " Access colors present in 256 colorspace
 if has("gui_running")
@@ -89,3 +88,4 @@ augroup BWCCreateDir
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
+nmap <leader>wq :wq<cr>
