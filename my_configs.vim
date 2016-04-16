@@ -66,7 +66,7 @@ fun! StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.css,*.coffee,*.erb,*.haml,*.html,*.java,*.js,*.rb,*.sass,*.scss,*.sh,*.slim  :call StripTrailingWhitespaces()
+autocmd BufWritePre *.css,*.coffee,*.erb,*.haml,*.html,*.java,*.js,*.md,*.rb,*.sass,*.scss,*.sh,*.slim,*.yml :call StripTrailingWhitespaces()
 set updatetime=250
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 0
