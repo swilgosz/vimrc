@@ -89,3 +89,8 @@ augroup BWCCreateDir
 augroup END
 
 nmap <leader>wq :wq<cr>
+set term=xterm-256color
+set ttyfast
+" disable Background Color Erase (BCE)
+set t_ut=
+
