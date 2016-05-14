@@ -5,6 +5,7 @@
 " Plugin 'thoughtbot/vim-rspec'
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
