@@ -36,6 +36,6 @@ endfunction
 set isfname+=: " include colon in filenames
 
 " Override vim commands 'gf', '^Wf', '^W^F'
-nnoremap gf :call GotoFile("")<CR>
-nnoremap <C-W>f :call GotoFile("new")<CR>
-nnoremap <C-W><C-F> :call GotoFile("new")<CR>
+nnoremap go :call GotoFile("")<CR>
+" nnoremap <C-W>f :call GotoFile("new")<CR>
+" nnoremap <C-W><C-F> :call GotoFile("new")<CR>

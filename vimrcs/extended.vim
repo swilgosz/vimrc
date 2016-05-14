@@ -34,12 +34,16 @@ set guioptions-=l
 set guioptions-=L
 
 " Colorscheme
+let base16colorspace=256  " Access colors present in 256 colorspace
+
 if has("gui_running")
-    set background=dark
-    colorscheme peaksea
+  set background=dark
+  let g:colors_name="monokai"
+  colorscheme base16-monokai
 else
-    colorscheme desert
-    let g:colors_name="desert"
+  set background=dark
+  let g:colors_name="monokai"
+  colorscheme base16-monokai
 endif
 
 

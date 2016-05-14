@@ -1,34 +1,63 @@
+"       This requries that you install https://github.com/amix/vimrc !"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Important: 
-"       This requries that you install https://github.com/amix/vimrc !
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim_runtime/sources_non_forked/Vundle.vim
-call vundle#begin('~/.vim_runtime/sources_non_forked')
 
-" Plugin manager, keep all things in one place 
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'thoughtbot/vim-rspec'
+call plug#begin('~/.vim/bundle')
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'danro/rename.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'heartsentwined/vim-emblem'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'kchmck/vim-coffee-script'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'sophacles/vim-bundle-mako'
+Plug 'terryma/vim-expand-region'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'slim-template/vim-slim'
+Plug 'scrooloose/syntastic'
+" Plug 'vim-scripts/vim-addon-mw-utils'
+Plug 'MarcWeber/vim-addon-mw-utils'
 
-Plugin 'tpope/vim-rails'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'chriskempson/base16-vim'
-Plugin 'danro/rename.vim'
-Plugin 'heartsentwined/vim-emblem'
-Plugin 'slim-template/vim-slim.git'
-Plugin 'Valloric/YouCompleteMe'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Track the engine.
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+
+" Plug 'mattn/emmet-vim' " for html tags
+" Plug 'tpope/vim-dispatch'
+" Load on nothing
+" Plug 'SirVer/ultisnips', { 'on': [] }
+ " vim-flake8
+ " open_file_under_cursor.vim
+Plug 'Valloric/YouCompleteMe', { 'on': [] }
+
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('YouCompleteMe')
+                     \| call youcompleteme#Enable() | autocmd! load_us_ycm
+augroup END
+
+call plug#end()
+ " mru
+ " set_tabline
+ " yankring
 
 """"""""""""""""""""""""""""""
 " => Load pathogen paths
@@ -63,32 +92,71 @@ else
     let g:yankring_history_dir = '~/.vim_runtime/temp_dirs/'
 endif
 
-
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 0
 
 let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
+map <leader>j :CtrlPClearAllCaches<cr>
 map <c-b> :CtrlPBuffer<cr>
 
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
+let g:ctrlp_max_height = 25
+let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 """"""""""""""""""""""""""""""
-" => ZenCoding
+" => AG
+""""""""""""""""""""""""""""""
+
+" bind K to grep word under cursor
+nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+""""""""""""""""""""""""""""""
+" => Emmet
 """"""""""""""""""""""""""""""
 " Enable all functions in all modes
-let g:user_zen_mode='a'
+" let g:user_zen_mode='a'
 
 
 """"""""""""""""""""""""""""""
-" => snipMate (beside <TAB> support <CTRL-j>)
+" => ultisnips
 """"""""""""""""""""""""""""""
-ino <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
-snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<c-i>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" CODE FOR YCM + UltiSnips integration
+" " If you want :UltiSnipsEdit to split your window.
+" https://www.reddit.com/r/vim/comments/2sx567/snipmate_and_youcompleteme_doesnt_work_well/
+let g:UltiSnipsEditSplit="vertical"
+
+"   " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+
 
 
 """"""""""""""""""""""""""""""
@@ -102,19 +170,25 @@ set grepprg=/bin/grep\ -nH
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
+let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark 
+map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git gutter (Git diff)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_enabled=1
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:multi_cursor_next_key="\<C-s>"
-
+" let g:multi_cursor_next_key="<C-s>"
+let g:multi_cursor_exit_from_insert_mode=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
@@ -133,7 +207,8 @@ let g:airline_theme="luna"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimroom
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
+let g:goyo_width=120
+let g:goyo_heighti=120
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
@@ -167,26 +242,37 @@ func! SyntasticCheckCoffeescript()
 endfunc
 nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=1
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fugitive (Git commands)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "https://github.com/tpope/vim-fugitive
 
+" Fugitive shortcuts
+nmap <leader>db :Gblame()<cr>
+nmap <leader>dv :Gvdiff<cr>
+nmap <leader>dw :Gwrite<cr>
+nmap <leader>dc :Gcommit<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-rspec commands
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rspec_runner = "os_x_iterm2"
-let g:rspec_command = "!spring rspec --color {spec}"
+"""""""""""""""""""""""""
+if has("gui_macvim")
+  let g:rspec_runner = "os_x_iterm"
+  let g:rspec_command = "spring rspec --color {spec}"
+  " let g:rspec_command = "Dispatch rspec {spec}"
+else
+  let g:rspec_runner = "os_x_iterm"
+  let g:rspec_command = "!spring rspec {spec}"
+endif
+
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tmuxline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tmuxline_powerline_separators = 0
