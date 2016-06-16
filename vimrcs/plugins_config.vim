@@ -277,11 +277,11 @@ map <Leader>sa :call RunAllSpecs()<CR>
 """""""""""""""""""""""""
 "go to alternative file
 "in current buffer
-nmap <leader>a :AE<cr> 
+nmap <leader>a :AE<cr>
 "in vertical split
 nmap <leader>va :AV<cr>
 
-"go to relative file 
+"go to relative file
 "in current buffer
 nmap <leader>r :RE<cr>
 "in vertical split
