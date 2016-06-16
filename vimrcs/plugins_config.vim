@@ -32,20 +32,21 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/syntastic'
-" Plug 'vim-scripts/vim-addon-mw-utils'
 Plug 'MarcWeber/vim-addon-mw-utils'
 
+""""""""""""""""
+" sNIPPETS
 " Track the engine.
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 
-" Plug 'mattn/emmet-vim' " for html tags
-" Plug 'tpope/vim-dispatch'
-" Load on nothing
-" Plug 'SirVer/ultisnips', { 'on': [] }
- " vim-flake8
- " open_file_under_cursor.vim
+""""""""""""""""
+" Markdown support
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
 augroup load_us_ycm
@@ -130,7 +131,6 @@ endif
 """"""""""""""""""""""""""""""
 " Enable all functions in all modes
 " let g:user_zen_mode='a'
-
 
 """"""""""""""""""""""""""""""
 " => ultisnips
@@ -248,7 +248,7 @@ nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 "https://github.com/tpope/vim-fugitive
 
 " Fugitive shortcuts
-nmap <leader>db :Gblame()<cr>
+nmap <leader>db :Gblame<cr>
 nmap <leader>dv :Gvdiff<cr>
 nmap <leader>dw :Gwrite<cr>
 nmap <leader>dc :Gcommit<cr>
@@ -258,21 +258,48 @@ nmap <leader>dc :Gcommit<cr>
 """""""""""""""""""""""""
 if has("gui_macvim")
   let g:rspec_runner = "os_x_iterm"
-  let g:rspec_command = "spring rspec --color {spec}"
+  " let g:rspec_command = "spring rspec --color {spec}"
+  let g:rspec_command = "!rspec --drb {spec}"
   " let g:rspec_command = "Dispatch rspec {spec}"
 else
-  let g:rspec_runner = "os_x_iterm"
-  let g:rspec_command = "!spring rspec {spec}"
+  " let g:rspec_runner = "os_x_iterm"
+  let g:rspec_command = "!rspec --drb {spec}"
 endif
 
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>st :call RunCurrentSpecFile()<CR>
+map <Leader>ss :call RunNearestSpec()<CR>
+map <Leader>sl :call RunLastSpec()<CR>
+map <Leader>sa :call RunAllSpecs()<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-rails commands
+"""""""""""""""""""""""""
+"go to alternative file
+"in current buffer
+nmap <leader>a :AE<cr> 
+"in vertical split
+nmap <leader>va :AV<cr>
 
+"go to relative file 
+"in current buffer
+nmap <leader>r :RE<cr>
+"in vertical split
+nmap <leader>va :RV<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tmuxline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:tmuxline_powerline_separators = 0
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'"""
+" => tabularize
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'"""
+let g:vim_markdown_folding_disabled = 1
+
+
+
+"""""""""""""""""""free commands
+" <leader>l
+" <leader>t
+" <leader>a

@@ -74,12 +74,13 @@ augroup BWCCreateDir
 augroup END
 
 nmap <leader>q :q<cr>
+nmap <leader>qa :qa<cr>
 nmap <leader>wq :wq<cr>
 nmap <leader>ee :e ~/.vim_runtime/vimrcs/plugins_config.vim<cr>
 nmap <leader>o :only<cr>
 
-set term=xterm-256color
 
+set term=xterm-256color
 " faster redrawing
 set ttyfast
 " disable Background Color Erase (BCE)
@@ -220,3 +221,5 @@ nmap <leader>y "*y
 " command! RemoveFancyCharacters :call RemoveFancyCharacters()
 " ​
 " nmap <silent> <leader>r :CtrlPBuffer<cr>
+filetype plugin indent on
+
