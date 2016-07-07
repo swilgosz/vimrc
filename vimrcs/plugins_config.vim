@@ -34,6 +34,7 @@ Plug 'tpope/vim-surround'
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/syntastic'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mustache/vim-mustache-handlebars'
 
 """"""""""""""""
 " sNIPPETS
