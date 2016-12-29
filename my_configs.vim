@@ -8,9 +8,9 @@ set tabstop=2
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-\   if line("'\"") > 0 && line("'\"") <= line("$") |
-\     exe "normal! g`\"" |
-\   end
+      \   if line("'\"") > 0 && line("'\"") <= line("$") |
+      \     exe "normal! g`\"" |
+      \   end
 
 set number
 set modifiable
@@ -48,11 +48,17 @@ fun! StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
+
+  " two lines below are to add extra line on EOF
+  " %s/\($\n\s*\)\+\%$//e
+  " %s/\%$/\r/
+
   call cursor(l, c)
 endfun
-
 autocmd BufWritePre *.css,*.coffee,*.emblem,*.erb,*.haml,*.html,*.java,*.js,*.md,*.rb,*.sass,*.scss,*.sh,*.slim,*.vim,*.yml :call StripTrailingWhitespaces()
+
 set updatetime=250
+set eol
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 0
 
@@ -61,16 +67,16 @@ let g:gitgutter_highlight_lines = 0
 let g:gitgutter_sign_column_always = 1
 
 function s:MkNonExDir(file, buf)
-	if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-		let dir=fnamemodify(a:file, ':h')
-		if !isdirectory(dir)
-			call mkdir(dir, 'p')
-		endif
-	endif
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
 endfunction
 augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+  autocmd!
+  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
 nmap <leader>q :q<cr>
@@ -109,8 +115,8 @@ set showbreak=-->         " display at the begining of wrapped lines
 
 " " show EOL characters
 set list
-set listchars=tab:▸\ 
-  ",eol:¬
+set listchars=tab:▸\
+",eol:¬
 " set smartcase " ... unless they contain at least one capital letter
 "
 " "" Tabs and Indents
@@ -144,6 +150,24 @@ set splitright
 
 " yank to system clipboard
 nmap <leader>y "*y
+nmap <leader>tn :tabnext<cr>
+nmap <leader>tp :tabprevious<cr>
+
+" highlight long lines
+nnoremap <Leader>H :call<SID>LongLineHLToggle()<cr>
+hi OverLength ctermbg=none cterm=none
+match OverLength /\%>80v/
+fun! s:LongLineHLToggle()
+ if !exists('w:longlinehl')
+  let w:longlinehl = matchadd('ErrorMsg', '.\%>80v', 0)
+  echo "Long lines highlighted"
+ else
+  call matchdelete(w:longlinehl)
+  unl w:longlinehl
+  echo "Long lines unhighlighted"
+ endif
+endfunction
+" set clipboard=unnamed
 
 
 " "paste lines from unnamed register and fix indentation
@@ -206,7 +230,7 @@ nmap <leader>y "*y
 " autocmd BufWritePre *     :call TrimWhiteSpace()
 
 " " Remove fancy characters COMMAND
-" 
+"
 " function! RemoveFancyCharacters()
 " let typo = {}
 " 	let typo["“"] = '"'

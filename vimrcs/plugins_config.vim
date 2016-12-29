@@ -2,7 +2,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
 
-" Plugin 'thoughtbot/vim-rspec'
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
 Plug 'cakebaker/scss-syntax.vim'
@@ -13,10 +12,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'heartsentwined/vim-emblem'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sophacles/vim-bundle-mako'
@@ -33,8 +30,10 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/syntastic'
+Plug 'wfleming/vim-codeclimate'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'vim-scripts/indenthtml.vim'
 
 """"""""""""""""
 " sNIPPETS
@@ -51,6 +50,26 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
+" Plug 'FuzzyFinder' " probably unnecesaary but maybe fastser
+" Plug 'L9' "for programming in vim
+Plug 'dyng/ctrlsf.vim' " for really nice search results like in sublime
+Plug 'yonchu/accelerated-smooth-scroll'
+"Plug 'rstacruz/sparkup', {'rtp': 'vim/'} " for better html
+Plug 'vim-scripts/IndexedSearch'
+"Plug 'vim-scripts/matchit.zip.git'
+"Plug 'ntpeters/vim-better-whitespace'
+"Plug 'ervandew/supertab'
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'vim-scripts/LustyExplorer'
+"Plug 'vim-scripts/LustyJuggler'
+"Plug 'bronson/vim-visual-star-search'
+"Plug 'Yggdroot/indentLine'
+
+Plug 'itspriddle/vim-jquery'
+Plug 'tpope/vim-haml'
+" Plug 'jtratner/vim-flavored-markdown.git'
+" Plug 'tpope/vim-vividchalk'
+" Plug 'vividchalk.vim'
 augroup load_us_ycm
   autocmd!
   autocmd InsertEnter * call plug#load('YouCompleteMe')
@@ -185,6 +204,10 @@ map <leader>nf :NERDTreeFind<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+nnoremap <silent> <leader>ds :GitGutterPreviewHunk<cr>
+nnoremap <silent> <leader>dp :GitGutterPrevHunk<cr>
+nnoremap <silent> <leader>dn :GitGutterNextHunk<cr>
+nnoremap <silent> <leader>dr :GitGutterRevertHunk<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
@@ -300,8 +323,26 @@ let g:tmuxline_powerline_separators = 0
 let g:vim_markdown_folding_disabled = 1
 
 
+"""""""""""""""""
+" => codeClimate
+nmap <Leader>aa :CodeClimateAnalyzeProject<CR>
+nmap <Leader>ao :CodeClimateAnalyzeOpenFiles<CR>
+nmap <Leader>af :CodeClimateAnalyzeCurrentFile<CR>
 
 """""""""""""""""""free commands
 " <leader>l
 " <leader>t
 " <leader>a
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => smooth-scroll
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ac_smooth_scroll_no_default_key_mappings = 1
+nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
+nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
+" nmap <silent> <C-f> <Plug>(ac-smooth-scroll-c-f)
+" nmap <silent> <C-b> <Plug>(ac-smooth-scroll-c-b)
+"
+"
+
