@@ -37,6 +37,15 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
+function! TidyHbs()
+  %s/}}{{/}}\r{{/g
+  %s/></>\r</g
+  %s/>{{/>\r{{/g
+  %s/}}</}}\r</g
+  exe "normal gg=G"
+endfunc
+nnoremap <leader>th :call TidyHbs()<cr>
+
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
