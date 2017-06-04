@@ -30,10 +30,12 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/syntastic'
+" Plug 'neomake/neomake'
 Plug 'wfleming/vim-codeclimate'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'vim-scripts/indenthtml.vim'
+Plug 'camthompson/vim-ember'
 
 """"""""""""""""
 " sNIPPETS
@@ -47,6 +49,14 @@ Plug 'ervandew/supertab'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+
+" function! BuildComposer(info)
+"   if a:info.status != 'unchanged' || a:info.force
+"     !cargo build --release
+"   endif
+" endfunction
+
+" Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
@@ -70,6 +80,7 @@ Plug 'tpope/vim-haml'
 " Plug 'jtratner/vim-flavored-markdown.git'
 " Plug 'tpope/vim-vividchalk'
 " Plug 'vividchalk.vim'
+"
 augroup load_us_ycm
   autocmd!
   autocmd InsertEnter * call plug#load('YouCompleteMe')
@@ -178,8 +189,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
-
-
 """"""""""""""""""""""""""""""
 " => Vim grep
 """"""""""""""""""""""""""""""
@@ -198,16 +207,6 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=1
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-nnoremap <silent> <leader>ds :GitGutterPreviewHunk<cr>
-nnoremap <silent> <leader>dp :GitGutterPrevHunk<cr>
-nnoremap <silent> <leader>dn :GitGutterNextHunk<cr>
-nnoremap <silent> <leader>dr :GitGutterRevertHunk<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-multiple-cursors
@@ -248,24 +247,43 @@ let g:go_fmt_command = "goimports"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Python
-let g:syntastic_python_checkers=['pyflakes']
+" let g:syntastic_python_checkers=['pyflakes']
 
 " Javascript
 let g:syntastic_javascript_checkers = ['jshint']
 
 " Go
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 
-" Custom CoffeeScript SyntasticCheck
-func! SyntasticCheckCoffeescript()
-    let l:filename = substitute(expand("%:p"), '\(\w\+\)\.coffee', '.coffee.\1.js', '')
-    execute "tabedit " . l:filename
-    execute "SyntasticCheck"
-    execute "Errors"
-endfunc
-nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
+" CoffeeScript SyntasticCheck
+let g:syntastic_coffeescript_checkers = ['coffeelint']
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => neomake
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" autocmd! BufWritePost * Neomake
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git gutter (Git diff)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_enabled=1
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
+nnoremap <silent> <leader>dh :GitGutterPreviewHunk<cr>
+nnoremap <silent> <leader>dt :GitGutterStageHunk<cr>
+nnoremap <silent> <leader>dk :GitGutterPrevHunk<cr>
+nnoremap <silent> <leader>dj :GitGutterNextHunk<cr>
+nnoremap <silent> <leader>du :GitGutterUndoHunk<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fugitive (Git commands)
@@ -274,8 +292,13 @@ nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 
 " Fugitive shortcuts
 nmap <leader>db :Gblame<cr>
+nmap <leader>dm :Gmerge
 nmap <leader>dv :Gvdiff<cr>
 nmap <leader>dw :Gwrite<cr>
+nmap <leader>dr :Gbrowse<cr>
+nmap <leader>dl :Gpull<cr>
+nmap <leader>dp :Gpush<cr>
+nmap <leader>ds :Gstatus<cr>
 nmap <leader>dc :Gcommit<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

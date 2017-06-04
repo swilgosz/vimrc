@@ -36,7 +36,7 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-
+nnoremap <leader>s :shell<cr>
 function! TidyHbs()
   %s/}}{{/}}\r{{/g
   %s/></>\r</g
@@ -64,7 +64,7 @@ fun! StripTrailingWhitespaces()
 
   call cursor(l, c)
 endfun
-autocmd BufWritePre *.css,*.coffee,*.emblem,*.erb,*.haml,*.html,*.java,*.js,*.md,*.rb,*.sass,*.scss,*.sh,*.slim,*.vim,*.yml :call StripTrailingWhitespaces()
+autocmd BufWritePre *.styl,*.css,*.coffee,*.emblem,*.hbs,*.erb,*.haml,*.html,*.java,*.js,*.md,*.rb,*.sass,*.scss,*.sh,*.slim,*.vim,*.yml :call StripTrailingWhitespaces()
 
 set updatetime=250
 set eol
@@ -95,7 +95,7 @@ nmap <leader>ee :e ~/.vim_runtime/vimrcs/plugins_config.vim<cr>
 nmap <leader>o :only<cr>
 
 
-set term=xterm-256color
+" set term=xterm-256color
 " faster redrawing
 set ttyfast
 " disable Background Color Erase (BCE)
@@ -136,14 +136,14 @@ set smartindent
 " "" Control and Splits
 if has('mouse')
   set mouse=a
-  set ttymouse=xterm2
+  " set ttymouse=xterm2
 endif
 
 " " put cursor in the new split
 nnoremap <leader>vl <C-w>v<C-w>l
 nnoremap <leader>vh <C-w>v<C-w>h
-nnoremap <leader>vk <C-w>v<C-w>k
-nnoremap <leader>vj <C-w>v<C-w>j
+nnoremap <leader>vk <C-w>s<C-w>k
+nnoremap <leader>vj <C-w>s<C-w>j
 
 " " more natural split opening
 set splitbelow

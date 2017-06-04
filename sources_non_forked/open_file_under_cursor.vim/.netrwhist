@@ -1,4 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/useo/.vim/bundle/indenthtml.vim/indent'
-let g:netrw_dirhist_2='/Users/useo/bin/project-specific'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/sebastian/.rvm/gems/ruby-2.3.3@ctb-assets/gems/oauth2-1.3.0/lib'
+let g:netrw_dirhist_2='/Users/sebastian/.rvm/gems/ruby-2.3.3@ctb-assets/gems/oauth2-1.3.0/lib/oauth2'
+let g:netrw_dirhist_3='/Users/sebastian/.rvm/gems/ruby-2.3.3@ctb-assets/gems/oauth2-1.3.0/lib/oauth2/strategy'
+let g:netrw_dirhist_4='/Users/sebastian/.rvm/gems/ruby-2.3.3@ctb-assets/gems/oauth2-1.3.0/lib/oauth2'
+let g:netrw_dirhist_5='/Users/sebastian/projects/ctb/source/.git/hooks'
+let g:netrw_dirhist_6='/private/etc/resolver'
+let g:netrw_dirhist_7='/Users/sebastian/Documents/jetpack/jetpack'
+let g:netrw_dirhist_8='/Users/sebastian/Documents/jetpack'
+let g:netrw_dirhist_9='/Users/sebastian/Documents/jetpack/jetpack'
