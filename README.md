@@ -28,7 +28,7 @@ Simply just do a git rebase!
     cd ~/.vim_runtime
     git pull --rebase
 
-## Some screenshots
+## Some screenshots.
 
 Colors when editing a Python file:
 ![Screenshot 1](http://files1.wedoist.com/e952fdb343b1e617b90d256e474d0370/as/screenshot_1.png)
